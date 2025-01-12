@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from ..about.views import about_view
 from ..contact.views import contact_view
+from django.conf import settings
+from django.conf.urls.static import static
+from ..books.views import book_detail_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', about_view),
     path('contact/', contact_view, name='contact'),
-]
+    path('book/<int:book_id>/', book_detail_view, name='book_detail'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
